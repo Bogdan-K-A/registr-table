@@ -1,0 +1,85 @@
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+
+:root {
+  /* ---------------------------------- color --------------------------------- */
+  --primary-color: #d2d2d2;
+  --secondary-color: #ff4d4d;
+  --btn-hover: #f75d5d;
+  --background-color: #16171b;
+  --white-color: #ffffff;
+  --border-input-color: #71717a;
+  --bg-input-color: #27272a;
+  --bg-form-wrapper-color: #222327;
+  --bg-div: #222327;
+  /* -------------------------------- tipografy ------------------------------- */
+
+  --primary-ff: "Exo 2", sans-serif;
+  --secondary-ff: "Mitr", sans-serif;
+  --secondary2-ff: "Codystar", cursive;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0 auto;
+  font-family: var(--primary-ff);
+  background-repeat: no-repeat;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+/* обнуляем дефолтные маркеры у всех маркированных списков */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrooling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* form */
+button,
+input,
+select,
+textarea {
+  margin: 0;
+}
+
+
+
+.active {
+  color: var(--secondary-color);
+
+}
