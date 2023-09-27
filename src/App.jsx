@@ -17,7 +17,7 @@ function App() {
           <Route path="registration" element={<Registration />} />
 
           <Route
-            path="/table"
+            path="table"
             element={
               <RequireAuth>
                 <Table />

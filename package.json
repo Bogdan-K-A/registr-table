@@ -2,7 +2,7 @@
   "name": "registr-form-and-table",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Bogdan-K-A.github.io/registr-table",
+  "homepage": "https://Bogdan-K-A.github.io/table",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",

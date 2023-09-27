@@ -33,7 +33,6 @@ export const Registration = () => {
           navigate("/", { replace: true });
           dispatch(register(user));
         }}
-        //валідація форми
         validationSchema={Yup.object().shape({
           email: Yup.string()
             .email()
