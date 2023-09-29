@@ -37,7 +37,7 @@ const authSlice = createSlice({
   },
   reducers: {
     register: (state, { payload }) => {
-      const currentEmail = state.usersData.filter(
+      const currentEmail = state.usersData.some(
         ({ email }) => payload.email === email
       );
 

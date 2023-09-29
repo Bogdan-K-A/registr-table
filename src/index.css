@@ -30,9 +30,6 @@ code {
   --secondary2-ff: "Codystar", cursive;
 }
 
-html {
-  font-size: 10px;
-}
 
 body {
   margin: 0 auto;
@@ -75,6 +72,7 @@ input,
 select,
 textarea {
   margin: 0;
+  outline: none;
 }
 
 

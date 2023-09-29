@@ -1,15 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Table = () => {
   const users = useSelector(({ data }) => data.usersData);
-  const location = useLocation();
-  console.log("location: ", location);
 
-  // personCard/
   return (
     <div style={{ marginTop: "30px" }}>
+      <h1>Таблица</h1>
+
       {users.map(({ id, name }) => {
         return (
           <li key={id} style={{ display: "flex", marginBottom: "30px" }}>

@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { signin } from "../toolkitRedux/auth/euthReducer";
+import { signin } from "../../toolkitRedux/auth/euthReducer";
+import s from "./Login.module.css";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -42,21 +43,15 @@ export const Login = () => {
           } = props;
 
           return (
-            <div className="form_bg_filter">
-              {/* {message && <h1 style={{ color: "red" }}>{message}</h1>} */}
-              <form onSubmit={handleSubmit} className="login_form">
+            <>
+              {/* {message && <h1 className={s.formErrorContent}>{message}</h1>} */}
+              <form className={s.form} onSubmit={handleSubmit}>
                 <div>
-                  <h1>Login</h1>
+                  <h1 className={s.formLabel}>Login</h1>
                 </div>
-                <label className="login_form__label">
-                  {errors.email && touched.email ? (
-                    <div style={{ color: "red" }}>{errors.email}</div>
-                  ) : (
-                    <div style={{ height: "19px" }}></div>
-                  )}
-
+                <label className={s.formLabel}>
                   <input
-                    className="login_form__input"
+                    className={s.formInput}
                     id="email"
                     placeholder=" E-mail"
                     type="email"
@@ -64,17 +59,16 @@ export const Login = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
+                  {errors.email && touched.email ? (
+                    <div className={s.formErrorContent}>{errors.email}</div>
+                  ) : (
+                    <div className={s.errorBox}></div>
+                  )}
                 </label>
 
-                <label className="login_form__label">
-                  {errors.password && touched.password ? (
-                    <div style={{ color: "red" }}>{errors.password}</div>
-                  ) : (
-                    <div style={{ height: "19px" }}></div>
-                  )}
-
+                <label className={s.formLabel}>
                   <input
-                    className="login_form__input"
+                    className={s.formInput}
                     id="password"
                     placeholder="Пароль"
                     type={type}
@@ -82,32 +76,29 @@ export const Login = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-
-                  <span className="form__show" onClick={showHiden}>
+                  <div className={s.formShow} onClick={showHiden}>
                     {type === "input" ? "HIDE" : "SHOW"}
-                  </span>
+                  </div>
+                  {errors.password && touched.password ? (
+                    <div className={s.formErrorContent}>{errors.password}</div>
+                  ) : (
+                    <div className={s.errorBox}></div>
+                  )}
                 </label>
 
-                <button
-                  className="login_form__btn login_form__btn--current"
-                  type="submit"
-                >
+                <button className={s.formButton} type="submit">
                   <span>Вход</span>
                 </button>
 
-                <div>
-                  <p>У вас нет аккаунта?</p>
-                  <button>
-                    <Link
-                      to="/registration"
-                      className="login_form__btn login_form__btn_color"
-                    >
-                      <span>Регистрация</span>
-                    </Link>
-                  </button>
+                <div className={s.btnWrapper}>
+                  <p className={s.styleQuestion}>У вас нет аккаунта?</p>
+
+                  <Link className={s.btn} to="/registration">
+                    Регистрация
+                  </Link>
                 </div>
               </form>
-            </div>
+            </>
           );
         }}
       </Formik>

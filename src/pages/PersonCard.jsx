@@ -7,5 +7,9 @@ export const PersonCard = () => {
   const usersData = useSelector(({ data }) => data.usersData);
   const user = usersData.find((user) => id === user.id);
 
-  return <div>{user.name}</div>;
+  return (
+    <div>
+      <h1>{user.name}</h1>
+    </div>
+  );
 };

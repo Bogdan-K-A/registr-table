@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
-import { Login } from "./pages/Login";
-import { Registration } from "./pages/Registration";
+import { Login } from "./pages/Login/Login";
+import { Registration } from "./pages/Registration/Registration";
 import { PersonCard } from "./pages/PersonCard";
 import { Table } from "./components/Table/Table";
 import { NotFoundPage } from "./pages/NotFoundPage";

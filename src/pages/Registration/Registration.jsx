@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { register } from "../toolkitRedux/auth/euthReducer";
+import { useDispatch } from "react-redux";
+import { register } from "../../toolkitRedux/auth/euthReducer";
+import s from "./Registration.module.css";
 
 export const Registration = () => {
   const [type, setType] = useState("password");
@@ -62,18 +63,15 @@ export const Registration = () => {
             handleSubmit,
           } = props;
           return (
-            <div className="form__filter">
+            <>
               {/* {message && <h1 style={{ color: "red" }}>{message}</h1>} */}
-              <form className="form" onSubmit={handleSubmit}>
-                <label className="form__label">
-                  {errors.name && touched.name ? (
-                    <div style={{ color: "red" }}>{errors.name}</div>
-                  ) : (
-                    <div style={{ height: "19px" }}></div>
-                  )}
-
+              <form className={s.form} onSubmit={handleSubmit}>
+                <div>
+                  <h1 className={s.formLabel}>Registration</h1>
+                </div>
+                <label className={s.formLabel}>
                   <input
-                    className="form__input"
+                    className={s.formInput}
                     type="name"
                     name="name"
                     placeholder="Ваше имя"
@@ -81,17 +79,16 @@ export const Registration = () => {
                     onBlur={handleBlur}
                     value={values.name}
                   />
+                  {errors.name && touched.name ? (
+                    <div className={s.formErrorContent}>{errors.name}</div>
+                  ) : (
+                    <div className={s.errorBox}></div>
+                  )}
                 </label>
 
-                <label className="form__label">
-                  {errors.email && touched.email ? (
-                    <div style={{ color: "red" }}>{errors.email}</div>
-                  ) : (
-                    <div style={{ height: "19px" }}></div>
-                  )}
-
+                <label className={s.formLabel}>
                   <input
-                    className="form__input"
+                    className={s.formInput}
                     type="email"
                     name="email"
                     placeholder="E-mail"
@@ -99,37 +96,35 @@ export const Registration = () => {
                     onBlur={handleBlur}
                     value={values.email}
                   />
+                  {errors.email && touched.email ? (
+                    <div className={s.formErrorContent}>{errors.email}</div>
+                  ) : (
+                    <div className={s.errorBox}></div>
+                  )}
                 </label>
 
-                <label className="form__label">
-                  {errors.password && touched.password ? (
-                    <div style={{ color: "red" }}>{errors.password}</div>
-                  ) : (
-                    <div style={{ height: "19px" }}></div>
-                  )}
-
+                <label className={s.formLabel}>
                   <input
-                    className="form__input"
+                    className={s.formInput}
                     type={type}
                     name="password"
                     placeholder="Пароль"
                     onChange={handleChange}
                     value={values.password}
                   />
-                  <span className="form__show" onClick={showHiden}>
+                  <div className={s.formShow} onClick={showHiden}>
                     {type === "input" ? "HIDE" : "SHOW"}
-                  </span>
+                  </div>
+                  {errors.password && touched.password ? (
+                    <div className={s.formErrorContent}>{errors.password}</div>
+                  ) : (
+                    <div className={s.errorBox}></div>
+                  )}
                 </label>
 
-                <label className="form__label">
-                  {errors.confirmPassword && touched.confirmPassword ? (
-                    <div style={{ color: "red" }}>{errors.confirmPassword}</div>
-                  ) : (
-                    <div style={{ height: "19px" }}></div>
-                  )}
-
+                <label className={s.formLabel}>
                   <input
-                    className="form__input"
+                    className={s.formInput}
                     type={type}
                     name="confirmPassword"
                     placeholder="Подтвердите пароль"
@@ -137,25 +132,28 @@ export const Registration = () => {
                     onBlur={handleBlur}
                     value={values.confirmPassword}
                   />
+                  {errors.confirmPassword && touched.confirmPassword ? (
+                    <div className={s.formErrorContent}>
+                      {errors.confirmPassword}
+                    </div>
+                  ) : (
+                    <div className={s.errorBox}></div>
+                  )}
                 </label>
 
-                <button
-                  type="submit"
-                  className="form__button form__button--active"
-                >
+                <button className={s.formButton} type="submit">
                   Регистрация
                 </button>
 
-                <div>
-                  <p>У вас есть аккаунт?</p>
-                  <button>
-                    <Link to="/" className="form__button">
-                      Вход
-                    </Link>
-                  </button>
+                <div className={s.btnWrapper}>
+                  <p className={s.styleQuestion}>У вас есть аккаунт?</p>
+
+                  <Link className={s.btn} to="/">
+                    Вход
+                  </Link>
                 </div>
               </form>
-            </div>
+            </>
           );
         }}
       </Formik>
