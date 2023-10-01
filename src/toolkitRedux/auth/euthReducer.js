@@ -1,14 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { uid } from "uid";
+import { createSlice } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { uid } from 'uid';
 
 const createAccount = (data) => {
   return {
     id: uid(),
-    name: "Jeck",
-    email: "test1@ukr.net",
-    password: "qwerty1",
+    name: 'Jeck',
+    email: 'test1@ukr.net',
+    password: 'qwerty1',
+    phone: '3423542431',
+    balance: '30.00',
+    dateRegistred: '11/09/2023',
     ...data,
   };
 };
@@ -16,39 +19,38 @@ const createAccount = (data) => {
 const ACCOUNT = createAccount({
   id: uid(),
 });
-//написать все поля которые должны быть в таблице
-//написать все поля которые должны быть в карточке
 
 const ACCOUNTS_MOCKS = [
   ACCOUNT,
   createAccount({
-    name: "Bob",
-    email: "test2@ukr.net",
-    password: "qwerty2",
+    name: 'Bob',
+    email: 'test2@ukr.net',
+    password: 'qwerty2',
+    phone: '999999999',
+    balance: '100.00',
+    dateRegistred: '15/09/2023',
   }),
 ];
 
 const authSlice = createSlice({
-  name: "data",
+  name: 'data',
   initialState: {
     usersData: ACCOUNTS_MOCKS,
-    message: "",
+    message: '',
     isLoggedIn: false,
   },
   reducers: {
     register: (state, { payload }) => {
-      const currentEmail = state.usersData.some(
-        ({ email }) => payload.email === email
-      );
+      const currentEmail = state.usersData.some(({ email }) => payload.email === email);
 
       if (currentEmail.email === payload.email) {
-        console.log("Такой пользователь уже есть");
-        state.message = "Такой пользователь уже есть";
+        console.log('Такой пользователь уже есть');
+        state.message = 'Такой пользователь уже есть';
         return;
       } else {
         state.usersData.push(createAccount(payload));
-        console.log("Вы зарегистрировались");
-        state.message = "Вы зарегистрировались";
+        console.log('Вы зарегистрировались');
+        state.message = 'Вы зарегистрировались';
       }
     },
 
@@ -60,11 +62,11 @@ const authSlice = createSlice({
         return payload.password === account.password;
       });
 
-      console.log("signin currentEmail", currentEmail);
-      console.log("signin currentPassword", currentPassword);
+      // console.log('signin currentEmail', currentEmail);
+      // console.log('signin currentPassword', currentPassword);
 
       if (!currentEmail || !currentPassword) {
-        state.message = "Что-то пошло не так";
+        state.message = 'Что-то пошло не так';
         return;
       } else {
         state.isLoggedIn = true;
@@ -80,7 +82,7 @@ const authSlice = createSlice({
 });
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
 };
 

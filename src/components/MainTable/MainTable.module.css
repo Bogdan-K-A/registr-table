@@ -1,0 +1,29 @@
+.tableWrapper {
+  margin: 30px;
+  padding: 15px;
+  background: #4a4848;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.titleTable {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.itemList {
+  display: flex;
+  margin-bottom: 30px;
+  border-bottom: 1px solid white;
+}
+
+.linkStyle {
+  color: black;
+  font-style: 16px;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.linkStyle:hover {
+  color: var(--secondary-color);
+  transition: .3s;
+}

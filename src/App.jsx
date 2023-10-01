@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { Login } from "./pages/Login/Login";
 import { Registration } from "./pages/Registration/Registration";
-import { PersonCard } from "./pages/PersonCard";
-import { Table } from "./components/Table/Table";
+import { PersonCard } from "./components/PersonCard/PersonCard";
+import { MainTable } from "./components/MainTable/MainTable";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import "./App.css";
 import { RequireAuth } from "./hoc/RequireAuth";
@@ -20,7 +20,7 @@ function App() {
             path="table"
             element={
               <RequireAuth>
-                <Table />
+                <MainTable />
               </RequireAuth>
             }
           />

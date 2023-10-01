@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { register } from "../../toolkitRedux/auth/euthReducer";
-import s from "./Registration.module.css";
+import React, { useState } from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { register } from '../../toolkitRedux/auth/euthReducer';
+import s from './Registration.module.css';
+import moment from 'moment/moment';
 
 export const Registration = () => {
-  const [type, setType] = useState("password");
+  const [type, setType] = useState('password');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const message = useSelector(({ data }) => data.message);
@@ -15,7 +16,7 @@ export const Registration = () => {
   const showHiden = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    let currentType = type === "password" ? "input" : "password";
+    let currentType = type === 'password' ? 'input' : 'password';
     setType(currentType);
   };
 
@@ -23,45 +24,35 @@ export const Registration = () => {
     <>
       <Formik
         initialValues={{
-          email: "",
-          password: "",
-          confirmPassword: "",
-          name: "",
+          email: '',
+          password: '',
+          confirmPassword: '',
+          name: '',
         }}
         onSubmit={({ name, email, password }) => {
-          const user = { name, email, password };
+          const dateRegistred = moment().format('DD/MM/YYYY');
+          const user = { name, email, password, dateRegistred };
 
-          navigate("/", { replace: true });
+          navigate('/', { replace: true });
           dispatch(register(user));
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string()
-            .email()
-            .min(10)
-            .max(63)
-            .required("Обязательное поле"),
+          email: Yup.string().email().min(10).max(63).required('Обязательное поле'),
           password: Yup.string()
-            .required("Обязательное поле")
-            .min(6, "Пароль слишком короткий (минимум 6 символов)")
-            .max(16, "Пароль слишком длинный (максимум 16 символов)"),
+            .required('Обязательное поле')
+            .min(6, 'Пароль слишком короткий (минимум 6 символов)')
+            .max(16, 'Пароль слишком длинный (максимум 16 символов)'),
           confirmPassword: Yup.string()
-            .required("Обязательное поле")
-            .oneOf([Yup.ref("password"), null], "Пароли не совпадают"),
+            .required('Обязательное поле')
+            .oneOf([Yup.ref('password'), null], 'Пароли не совпадают'),
           name: Yup.string()
-            .min(1, "Имя не должно быть пустым")
-            .max(12, "Имя не может быть больше 12 символов")
-            .required("Обязательное поле"),
+            .min(1, 'Имя не должно быть пустым')
+            .max(12, 'Имя не может быть больше 12 символов')
+            .required('Обязательное поле'),
         })}
       >
         {(props) => {
-          const {
-            values,
-            touched,
-            errors,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-          } = props;
+          const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
           return (
             <>
               {/* {message && <h1 style={{ color: "red" }}>{message}</h1>} */}
@@ -112,14 +103,16 @@ export const Registration = () => {
                     onChange={handleChange}
                     value={values.password}
                   />
-                  <div className={s.formShow} onClick={showHiden}>
-                    {type === "input" ? "HIDE" : "SHOW"}
+                  <div className={s.formShowWrapper}>
+                    {errors.password && touched.password ? (
+                      <p className={s.formErrorContent}>{errors.password}</p>
+                    ) : (
+                      <div className={s.errorBox}></div>
+                    )}
+                    <p className={s.formShow} onClick={showHiden}>
+                      {type === 'input' ? 'HIDE' : 'SHOW'}
+                    </p>
                   </div>
-                  {errors.password && touched.password ? (
-                    <div className={s.formErrorContent}>{errors.password}</div>
-                  ) : (
-                    <div className={s.errorBox}></div>
-                  )}
                 </label>
 
                 <label className={s.formLabel}>
@@ -133,9 +126,7 @@ export const Registration = () => {
                     value={values.confirmPassword}
                   />
                   {errors.confirmPassword && touched.confirmPassword ? (
-                    <div className={s.formErrorContent}>
-                      {errors.confirmPassword}
-                    </div>
+                    <div className={s.formErrorContent}>{errors.confirmPassword}</div>
                   ) : (
                     <div className={s.errorBox}></div>
                   )}

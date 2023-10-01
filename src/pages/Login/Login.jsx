@@ -76,14 +76,16 @@ export const Login = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  <div className={s.formShow} onClick={showHiden}>
-                    {type === "input" ? "HIDE" : "SHOW"}
+                  <div className={s.formShowWrapper}>
+                    {errors.password && touched.password ? (
+                      <p className={s.formErrorContent}>{errors.password}</p>
+                    ) : (
+                      <div className={s.errorBox}></div>
+                    )}
+                    <p className={s.formShow} onClick={showHiden}>
+                      {type === "input" ? "HIDE" : "SHOW"}
+                    </p>
                   </div>
-                  {errors.password && touched.password ? (
-                    <div className={s.formErrorContent}>{errors.password}</div>
-                  ) : (
-                    <div className={s.errorBox}></div>
-                  )}
                 </label>
 
                 <button className={s.formButton} type="submit">

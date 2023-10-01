@@ -10,6 +10,8 @@
   border-radius: 20px;
 }
 
+
+
 .formLabel {
   margin-bottom: 20px;
 }
@@ -40,10 +42,18 @@
 }
 
 
+.formShowWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .formShow {
   font-weight: bold;
   font-size: 12px;
 }
+
+
 
 .formButton,
 .btn {
