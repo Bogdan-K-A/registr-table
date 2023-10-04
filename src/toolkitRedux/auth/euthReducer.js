@@ -41,9 +41,10 @@ const authSlice = createSlice({
   },
   reducers: {
     register: (state, { payload }) => {
-      const currentEmail = state.usersData.some(({ email }) => payload.email === email);
+      const currentEmail = state.usersData.find(({ email }) => payload.email === email);
+      console.log('currentEmail: ', currentEmail);
 
-      if (currentEmail.email === payload.email) {
+      if (currentEmail) {
         console.log('Такой пользователь уже есть');
         state.message = 'Такой пользователь уже есть';
         return;
@@ -66,6 +67,7 @@ const authSlice = createSlice({
       // console.log('signin currentPassword', currentPassword);
 
       if (!currentEmail || !currentPassword) {
+        console.log('Что-то пошло не так');
         state.message = 'Что-то пошло не так';
         return;
       } else {

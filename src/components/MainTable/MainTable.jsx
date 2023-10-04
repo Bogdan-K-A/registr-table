@@ -92,6 +92,8 @@ export const MainTable = () => {
     [order, orderBy, page, rowsPerPage]
   );
 
+  console.log('users: ', users);
+
   return (
     <div className={s.tableWrapper}>
       <h1 className={s.titleTable}>Таблица</h1>
@@ -111,7 +113,7 @@ export const MainTable = () => {
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.name);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
+                // console.log('row: ', row);
                 return (
                   <TableRow
                     hover
