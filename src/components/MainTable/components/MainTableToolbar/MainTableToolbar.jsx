@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, TextField, Toolbar, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { clearFilter, filter } from '../../../toolkitRedux/auth/euthReducer';
+import { clearFilter, filter } from '../../../../toolkitRedux/auth/euthReducer';
 import { BiSearchAlt } from 'react-icons/bi';
+import { AiOutlineClear } from 'react-icons/ai';
 import { Formik } from 'formik';
+import s from './MainTableToolbar.module.css';
 
 export const MainTableToolbar = ({ numSelected }) => {
   const [option, setOption] = useState('');
@@ -32,7 +34,6 @@ export const MainTableToolbar = ({ numSelected }) => {
         initialValues={{}}
         onSubmit={(value) => {
           dispatch(filter(value));
-
           setSearchText('');
         }}
       >
@@ -56,7 +57,7 @@ export const MainTableToolbar = ({ numSelected }) => {
           };
           return (
             <>
-              <form onSubmit={handleSubmit}>
+              <form className={s.formToolbar} onSubmit={handleSubmit}>
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                   <InputLabel>Опции</InputLabel>
                   <Select label="Опции" onChange={handleOptionsChange}>
@@ -70,6 +71,7 @@ export const MainTableToolbar = ({ numSelected }) => {
                 </FormControl>
 
                 <TextField
+                  sx={{ m: 1, minWidth: 120 }}
                   size="small"
                   label={option ? labelSearch : 'Search'}
                   type="text"
@@ -82,18 +84,18 @@ export const MainTableToolbar = ({ numSelected }) => {
                   value={searchText}
                 />
 
-                <button type="submit">
-                  <BiSearchAlt size={35} />
+                <button className={s.btn} type="submit">
+                  <BiSearchAlt title="Фильтр" size={35} />
                 </button>
-                <button
-                  type="button"
+
+                <AiOutlineClear
+                  title="Очистить фильтр"
+                  size={35}
                   onClick={() => {
                     dispatch(clearFilter());
                     setSearchText('');
                   }}
-                >
-                  Очистить фильтр
-                </button>
+                />
               </form>
             </>
           );

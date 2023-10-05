@@ -11,7 +11,6 @@ export const Registration = () => {
   const [type, setType] = useState('password');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const message = useSelector(({ data }) => data.message);
 
   const showHiden = (e) => {
     e.preventDefault();
@@ -34,7 +33,6 @@ export const Registration = () => {
           const user = { name, email, password, dateRegistred };
 
           dispatch(register(user));
-
           navigate('/', { replace: true });
         }}
         validationSchema={Yup.object().shape({
@@ -56,7 +54,6 @@ export const Registration = () => {
           const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
           return (
             <>
-              {/* {message && <h1 style={{ color: "red" }}>{message}</h1>} */}
               <form className={s.form} onSubmit={handleSubmit}>
                 <div>
                   <h1 className={s.formLabel}>Registration</h1>

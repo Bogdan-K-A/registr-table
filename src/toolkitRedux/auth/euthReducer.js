@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { uid } from 'uid';
+import { onError, onSuccess, onWarning } from '../../components/Error/ErrorMessages';
 
 const createAccount = (data) => {
   return {
@@ -37,7 +38,7 @@ const authSlice = createSlice({
   initialState: {
     usersData: ACCOUNTS_MOCKS,
     originData: ACCOUNTS_MOCKS,
-    message: '',
+
     isLoggedIn: false,
   },
   reducers: {
@@ -45,14 +46,13 @@ const authSlice = createSlice({
       const currentEmail = state.usersData.find(({ email }) => payload.email === email);
 
       if (currentEmail) {
-        console.log('Такой пользователь уже есть');
-        state.message = 'Такой пользователь уже есть';
+        onWarning('Такой пользователь уже есть');
         return;
       } else {
         state.usersData.push(createAccount(payload));
         state.originData.push(createAccount(payload));
-        console.log('Вы зарегистрировались');
-        state.message = 'Вы зарегистрировались';
+
+        onSuccess('Вы зарегистрировались');
       }
     },
 
@@ -65,8 +65,8 @@ const authSlice = createSlice({
       });
 
       if (!currentEmail || !currentPassword) {
-        console.log('Что-то пошло не так');
-        state.message = 'Что-то пошло не так';
+        onError('Что-то пошло не так');
+
         return;
       } else {
         state.isLoggedIn = true;

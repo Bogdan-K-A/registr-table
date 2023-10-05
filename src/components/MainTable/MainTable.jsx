@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableRow, Paper, Checkbox, TablePagination } from '@mui/material';
 import { MainTableHead } from './components/MainTableHead';
-import { MainTableToolbar } from './components/MainTableToolbar';
+import { MainTableToolbar } from './components/MainTableToolbar/MainTableToolbar';
 import s from './MainTable.module.css';
 
 function descendingComparator(a, b, orderBy) {
