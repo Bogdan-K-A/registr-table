@@ -86,13 +86,10 @@ export const MainTable = () => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // СОРТИРОВКА
-  const visibleRows = useMemo(
-    () => stableSort(users, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage]
+  const visibleRows = stableSort(users, getComparator(order, orderBy)).slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
   );
-
-  console.log('users: ', users);
 
   return (
     <div className={s.tableWrapper}>

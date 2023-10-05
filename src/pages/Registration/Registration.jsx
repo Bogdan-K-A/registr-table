@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../toolkitRedux/auth/euthReducer';
 import s from './Registration.module.css';
 import moment from 'moment/moment';
@@ -33,8 +33,9 @@ export const Registration = () => {
           const dateRegistred = moment().format('DD/MM/YYYY');
           const user = { name, email, password, dateRegistred };
 
-          navigate('/', { replace: true });
           dispatch(register(user));
+
+          navigate('/', { replace: true });
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string().email().min(10).max(63).required('Обязательное поле'),

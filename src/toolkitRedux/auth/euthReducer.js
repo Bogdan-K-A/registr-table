@@ -36,13 +36,13 @@ const authSlice = createSlice({
   name: 'data',
   initialState: {
     usersData: ACCOUNTS_MOCKS,
+    originData: ACCOUNTS_MOCKS,
     message: '',
     isLoggedIn: false,
   },
   reducers: {
     register: (state, { payload }) => {
       const currentEmail = state.usersData.find(({ email }) => payload.email === email);
-      console.log('currentEmail: ', currentEmail);
 
       if (currentEmail) {
         console.log('Такой пользователь уже есть');
@@ -50,6 +50,7 @@ const authSlice = createSlice({
         return;
       } else {
         state.usersData.push(createAccount(payload));
+        state.originData.push(createAccount(payload));
         console.log('Вы зарегистрировались');
         state.message = 'Вы зарегистрировались';
       }
@@ -62,9 +63,6 @@ const authSlice = createSlice({
       const currentPassword = state.usersData.some((account) => {
         return payload.password === account.password;
       });
-
-      // console.log('signin currentEmail', currentEmail);
-      // console.log('signin currentPassword', currentPassword);
 
       if (!currentEmail || !currentPassword) {
         console.log('Что-то пошло не так');
@@ -79,7 +77,23 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
     },
 
-    filter: (state) => {},
+    filter: (state, { payload }) => {
+      let currentValue = Object.values(payload)[0].toLowerCase();
+
+      state.usersData = state.originData.filter((user) => {
+        const normalizedText = user.name.toLowerCase();
+
+        return (
+          normalizedText.includes(currentValue) ||
+          user.email.includes(currentValue) ||
+          user.phone.includes(currentValue)
+        );
+      });
+    },
+
+    clearFilter: (state) => {
+      state.usersData = state.originData;
+    },
   },
 });
 
@@ -88,5 +102,5 @@ const persistConfig = {
   storage,
 };
 
-export const { register, signin, signout, filter } = authSlice.actions;
+export const { register, signin, signout, filter, clearFilter } = authSlice.actions;
 export const authReducer = persistReducer(persistConfig, authSlice.reducer);
