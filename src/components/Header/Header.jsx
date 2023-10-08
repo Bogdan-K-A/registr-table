@@ -1,15 +1,9 @@
-import React from "react";
-import {
-  Link,
-  NavLink,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { signout } from "../../toolkitRedux/auth/euthReducer";
-import { TbLogout2 } from "react-icons/tb";
-import s from "./Header.module.css";
+import React from 'react';
+import { Link, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from '../../toolkitRedux/auth/euthReducer';
+import { TbLogout2 } from 'react-icons/tb';
+import s from './Header.module.css';
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -33,6 +27,9 @@ export const Header = () => {
           </>
         )}
 
+        <Link className={s.linkTable} to="/calendar">
+          Календарь
+        </Link>
         {currentPath && (
           <Link className={s.linkTable} to="/table">
             Вернуться к таблице
@@ -46,7 +43,7 @@ export const Header = () => {
           size={30}
           title="Logout"
           onClick={() => {
-            navigate("/", { replace: true });
+            navigate('/', { replace: true });
             dispatch(signout());
           }}
         />

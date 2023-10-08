@@ -8,6 +8,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import './App.css';
 import { RequireAuth } from './hoc/RequireAuth';
 import { ToastContainer } from 'react-toastify';
+import { Calendar } from './pages/Calendar/Calendar';
 
 function App() {
   return (
@@ -31,6 +32,14 @@ function App() {
               <RequireAuth>
                 <PersonCard />
               </RequireAuth>
+            }
+          />
+          <Route
+            path="calendar"
+            element={
+              <Calendar />
+              // <RequireAuth>
+              // </RequireAuth>
             }
           />
           <Route path="*" element={<NotFoundPage />} />
