@@ -1,7 +1,17 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { FormControl, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material';
+
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Modal,
+  Select,
+  TextField,
+  Typography,
+  Box,
+  Button,
+  ButtonGroup,
+} from '@mui/material';
 import s from './ModalForm.module.css';
 import { Formik } from 'formik';
 
@@ -21,8 +31,9 @@ export const ModalForm = ({ open, handleClose }) => {
           </Typography>
 
           <Formik
-            initialValues={{ event: '' }}
+            initialValues={{ event: '', date: '', color: '' }}
             onSubmit={(values) => {
+              console.log('values: ', values);
               // dispatch(signin(values));
             }}
           >
@@ -32,8 +43,9 @@ export const ModalForm = ({ open, handleClose }) => {
               return (
                 <>
                   <form className={s.form} onSubmit={handleSubmit}>
-                    <p>Evetnt title</p>
+                    <p className={s.labelMargin}>Evetnt title</p>
                     <TextField
+                      className={s.Input}
                       sx={{ m: 1, minWidth: 120 }}
                       size="small"
                       label="Event"
@@ -43,22 +55,22 @@ export const ModalForm = ({ open, handleClose }) => {
                       onBlur={handleBlur}
                       value={values.event}
                     />
-                    <label className={s.formLabel}>
-                      <p>Evetnt date</p>
-                      <input
-                        // className={s.formInput}
-                        // placeholder="event"
-                        type="date"
-                        // value={values.event}
-                        // onChange={handleChange}
-                        // onBlur={handleBlur}
-                      />
-                    </label>
-                    <p>Select a theme</p>
-                    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                      <InputLabel>Select a theme</InputLabel>
 
-                      <Select label="Опции">
+                    <p className={s.labelMargin}>Evetnt date</p>
+                    <TextField
+                      className={s.Input}
+                      sx={{ m: 1, width: 223 }}
+                      size="small"
+                      type="date"
+                      value={values.date}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+
+                    <p className={s.labelMargin}>Select a theme</p>
+                    <FormControl sx={{ m: 1, width: 223 }} size="small">
+                      <InputLabel>Select a theme</InputLabel>
+                      <Select className={s.Input} label="Опции">
                         <MenuItem>
                           <em>None</em>
                         </MenuItem>
@@ -67,13 +79,14 @@ export const ModalForm = ({ open, handleClose }) => {
                         <MenuItem value={'red'}>Red theme</MenuItem>
                       </Select>
                     </FormControl>
-
-                    <button className={s.formButton} onClose={handleClose}>
-                      <span>Close</span>
-                    </button>
-                    <button className={s.formButton} type="submit">
-                      <span>Save Event</span>
-                    </button>
+                    <Box sx={{ mt: 1 }}>
+                      <Button sx={{ mr: 1 }} onClick={handleClose}>
+                        <span>Close</span>
+                      </Button>
+                      <Button type="submit">
+                        <span>Save Event</span>
+                      </Button>
+                    </Box>
                   </form>
                 </>
               );

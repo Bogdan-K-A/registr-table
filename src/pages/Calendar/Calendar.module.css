@@ -1,43 +1,61 @@
-.calendarWrapper {
-  /* margin: 100px auto auto; */
-
-}
-
 .calendarGrid {
   position: relative;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   border: 1px solid #80808029;
-  width: 60%;
+  width: 70%;
   padding: 50px 20px 20px;
-  margin: 100px auto auto;
+  margin: 30px auto auto;
   border-radius: 10px;
 
   box-shadow: 0px 0px 50px 0px rgb(100 100 100);
 }
 
-.gridBox {
+.dayBox,
+.currentDay {
   display: grid;
   justify-items: center;
   height: 100px;
   padding: 10px;
   border: 1px solid #80808029;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.dayBox:hover {
+  background: #b6b6b629;
+}
+
+.currentDay {
+  background: #b6b6b629;
+}
+
+.notСurrentMonth {
+  color: transparent;
+  /* color: #808080a8; */
 }
 
 .nameMonthWrapper {
   position: absolute;
-  text-align: center;
-  top: 44px;
+  display: flex;
+  justify-content: center;
+  top: 40px;
   left: 25px;
-  width: 85px;
   background-color: var(--background-color);
 }
 
 .nameMonth {
-  font-size: 12px;
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+.year {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .buttonGroup {
@@ -53,4 +71,24 @@
 .btn:hover svg {
   color: currentColor;
   transition: all 250ms
+}
+
+.wrapperNameDay {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 97%;
+  padding: 0 20px;
+  z-index: -1;
+}
+
+.nameDay {
+  display: grid;
+  justify-items: center;
+  font-size: 14px;
 }
