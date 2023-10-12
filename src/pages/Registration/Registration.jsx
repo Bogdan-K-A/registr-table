@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../../toolkitRedux/auth/euthReducer';
+import { register } from '../../redux/auth/authReducer';
 import s from './Registration.module.css';
 import moment from 'moment/moment';
 

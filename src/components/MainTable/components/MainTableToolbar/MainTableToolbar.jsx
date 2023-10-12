@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, TextField, Toolbar, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { clearFilter, filter } from '../../../../toolkitRedux/auth/euthReducer';
+import { clearFilter, filter } from '../../../../redux/auth/authReducer';
 import { BiSearchAlt } from 'react-icons/bi';
 import { AiOutlineClear } from 'react-icons/ai';
 import { Formik } from 'formik';

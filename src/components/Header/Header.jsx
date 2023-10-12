@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signout } from '../../toolkitRedux/auth/euthReducer';
+import { signout } from '../../redux/auth/authReducer';
 import { TbLogout2 } from 'react-icons/tb';
 import s from './Header.module.css';
 

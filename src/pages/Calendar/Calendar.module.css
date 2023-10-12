@@ -34,8 +34,8 @@
 }
 
 .notСurrentMonth {
-  color: transparent;
-  /* color: #808080a8; */
+  /* color: transparent; */
+  color: #808080a8;
 }
 
 .nameMonthWrapper {
