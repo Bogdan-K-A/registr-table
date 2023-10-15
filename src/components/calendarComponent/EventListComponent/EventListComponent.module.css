@@ -1,0 +1,16 @@
+.list {
+  width: 100%;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #80808085;
+}
+
+.listItem svg:hover {
+  fill: #1976d2;
+}

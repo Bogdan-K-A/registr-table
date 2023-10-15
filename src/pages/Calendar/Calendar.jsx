@@ -5,17 +5,18 @@ import { Button, ButtonGroup } from '@mui/material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { ModalForm } from '../../components/calendarComponent/ModalForm/ModalForm';
-import { TOTAL_DAYS, WEEK_DAYS } from './constants';
+import { TOTAL_DAYS, WEEK_DAYS } from '../../components/calendarComponent/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterEvents } from '../../redux/calendar/calendarReducer';
+import { EventListComponent } from '../../components/calendarComponent/EventListComponent/EventListComponent';
 
 export const Calendar = () => {
   const [open, setOpen] = useState(false);
   const [today, setToday] = useState(moment());
   const [selectedDayUnix, setSelectedDayUnix] = useState(null);
-  const events = useSelector(({ calendar }) => calendar.events);
+  const [localEvents, setLocalEvents] = useState([]);
+  const events = useSelector(({ calendar }) => calendar.currentEvents);
   const dispatch = useDispatch();
-  console.log('events: ', events);
 
   const handleOpen = (dayItem) => {
     setSelectedDayUnix(dayItem);
@@ -39,12 +40,24 @@ export const Calendar = () => {
   const endDateQuery = startDay.clone().add(TOTAL_DAYS, 'day').format('X');
 
   useEffect(() => {
-    dispatch(filterEvents({ startDateQuery: startDateQuery, endDateQuery: endDateQuery }));
-  }, []);
+    if (startDay) {
+      dispatch(filterEvents({ startDateQuery, endDateQuery }));
+    }
+  }, [startDateQuery, endDateQuery]);
+
+  useEffect(() => {
+    setLocalEvents(events);
+  }, [events]);
 
   return (
     <div>
       <div className={s.calendarGrid}>
+        <div className={s.nameMonthWrapper}>
+          <p className={s.nameMonth}>
+            {today.format('MMMM')} <span className={s.year}>{today.format('YYYY')}</span>
+          </p>
+        </div>
+
         <div className={s.wrapperNameDay}>
           {weekDaysArr.map((day) => {
             return (
@@ -54,13 +67,7 @@ export const Calendar = () => {
             );
           })}
         </div>
-        <div className={s.nameMonthWrapper}>
-          <p className={s.nameMonth}>
-            {today.format('MMMM')} <span className={s.year}>{today.format('YYYY')}</span>
-          </p>
-        </div>
 
-        {/* ПЕРЕКЛЮЧЕНИЕ МЕСЯЦА */}
         <ButtonGroup className={s.buttonGroup} size="small" aria-label="small button group">
           <Button className={s.btn} onClick={prevRandler}>
             <NavigateBeforeIcon />
@@ -70,7 +77,6 @@ export const Calendar = () => {
           </Button>
         </ButtonGroup>
 
-        {/* CЕТКА КАЛЕНДАРЯ */}
         {calendarFoolArr.map((dayItem) => {
           return (
             <div
@@ -78,12 +84,23 @@ export const Calendar = () => {
               key={dayItem.unix()}
               onClick={() => handleOpen(dayItem.unix())}
             >
-              {!isCurrentDay(dayItem) && <p className={s.dayBox}>{dayItem.format('D')}</p>}
-              {isCurrentDay(dayItem) && <p className={s.currentDay}>{dayItem.format('D')}</p>}
+              <div className={!isCurrentDay(dayItem) ? s.dayBox : s.currentDay}>
+                <span className={dayItem.day() === 6 || dayItem.day() === 0 ? s.weekend : null}>
+                  {dayItem.format('D')}
+                </span>
+                <EventListComponent dayItem={dayItem} localEvents={localEvents} />
+              </div>
             </div>
           );
         })}
-        <ModalForm open={open} handleClose={handleClose} selectedDayUnix={selectedDayUnix} />
+
+        <ModalForm
+          open={open}
+          handleClose={handleClose}
+          selectedDayUnix={selectedDayUnix}
+          localEvents={localEvents}
+          setLocalEvents={setLocalEvents}
+        />
       </div>
     </div>
   );

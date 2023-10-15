@@ -38,11 +38,15 @@
   color: #808080a8;
 }
 
+.weekend {
+  color: red;
+}
+
 .nameMonthWrapper {
   position: absolute;
   display: flex;
   justify-content: center;
-  top: 40px;
+  top: 17px;
   left: 25px;
   background-color: var(--background-color);
 }
