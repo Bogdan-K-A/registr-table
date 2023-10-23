@@ -123,11 +123,11 @@ export const ModalForm = ({ open, handleClose, selectedDayUnix, setLocalEvents, 
                     </div>
 
                     <Box sx={{ mt: 1 }}>
-                      <Button sx={{ mr: 1 }} onClick={handleClose}>
-                        <span>Close</span>
-                      </Button>
                       <Button type="submit">
                         <span>Save Event</span>
+                      </Button>
+                      <Button sx={{ mr: 1 }} onClick={handleClose}>
+                        <span>Close</span>
                       </Button>
                     </Box>
                   </form>
