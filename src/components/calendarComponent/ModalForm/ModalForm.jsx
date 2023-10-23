@@ -7,11 +7,13 @@ import { useDispatch } from 'react-redux';
 import { uid } from 'uid';
 import { addEvent } from '../../../redux/calendar/calendarReducer';
 import moment from 'moment';
+import { onError, onSuccess, onWarning } from '../../../components/Error/ErrorMessages';
 
 export const ModalForm = ({ open, handleClose, selectedDayUnix, setLocalEvents, localEvents }) => {
   const dispatch = useDispatch();
   const currentDate = moment.unix(selectedDayUnix);
   const currentNumber = currentDate.format('D');
+  const currentTime = moment().format('HH:mm');
 
   return (
     <div>
@@ -39,14 +41,22 @@ export const ModalForm = ({ open, handleClose, selectedDayUnix, setLocalEvents, 
               handleClose();
 
               setLocalEvents([...localEvents, values]);
+
+              onSuccess(`Удачно создана задача на ${currentNumber} число`);
             }}
           >
             {(props) => {
               const { values, touched, errors, handleChange, handleBlur, handleSubmit, setFieldValue } = props;
 
               const handleChangeTime = (e, fieldName) => {
-                const timeValue = e.target.value;
-                setFieldValue(fieldName, timeValue);
+                var timeValue = e.target.value;
+
+                if (currentTime >= timeValue) {
+                  onWarning('Не верно выбрано время');
+                  setFieldValue(fieldName, currentTime);
+                } else {
+                  setFieldValue(fieldName, timeValue);
+                }
               };
 
               return (
@@ -83,7 +93,7 @@ export const ModalForm = ({ open, handleClose, selectedDayUnix, setLocalEvents, 
                           sx={{ mr: 1 }}
                           size="small"
                           type="time"
-                          value={values.time}
+                          value={values.started_at}
                           onChange={(e) => handleChangeTime(e, 'started_at')}
                           onBlur={handleBlur}
                         />
@@ -101,7 +111,7 @@ export const ModalForm = ({ open, handleClose, selectedDayUnix, setLocalEvents, 
                           size="small"
                           type="time"
                           onChange={(e) => handleChangeTime(e, 'finished_at')}
-                          value={values.time}
+                          value={values.finished_at}
                           onBlur={handleBlur}
                         />
                         {errors.finished_at && touched.finished_at ? (

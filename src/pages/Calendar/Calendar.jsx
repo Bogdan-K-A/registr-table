@@ -20,7 +20,11 @@ export const Calendar = () => {
 
   const handleOpen = (dayItem) => {
     setSelectedDayUnix(dayItem);
-    setOpen(true);
+    const currentDate = moment.unix(dayItem);
+
+    if (isPastDays(currentDate) && isSelectedMonth(currentDate)) {
+      setOpen(true);
+    }
   };
   const handleClose = () => setOpen(false);
 
@@ -32,6 +36,7 @@ export const Calendar = () => {
 
   const isCurrentDay = (day) => moment().isSame(day, 'day');
   const isSelectedMonth = (day) => today.isSame(day, 'month');
+  const isPastDays = (day) => moment().subtract(1, 'day').isBefore(day, 'day');
 
   const prevRandler = () => setToday((prev) => prev.clone().subtract(1, 'month'));
   const nextRandler = () => setToday((prev) => prev.clone().add(1, 'month'));
@@ -80,14 +85,17 @@ export const Calendar = () => {
         {calendarFoolArr.map((dayItem) => {
           return (
             <div
-              className={!isSelectedMonth(dayItem) ? s.notСurrentMonth : null}
+              className={
+                (!isSelectedMonth(dayItem) && s.notСurrentMonth) ||
+                (!isPastDays(dayItem) ? s.stopClik : s.pointerNormal)
+              }
               key={dayItem.unix()}
               onClick={() => handleOpen(dayItem.unix())}
             >
               <div className={!isCurrentDay(dayItem) ? s.dayBox : s.currentDay}>
-                <span className={dayItem.day() === 6 || dayItem.day() === 0 ? s.weekend : null}>
+                <div className={dayItem.day() === 6 || dayItem.day() === 0 ? s.weekend : null}>
                   {dayItem.format('D')}
-                </span>
+                </div>
                 <EventListComponent dayItem={dayItem} localEvents={localEvents} />
               </div>
             </div>
