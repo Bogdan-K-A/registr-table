@@ -24,7 +24,7 @@
   padding: 10px;
   border: 1px solid #80808029;
   font-weight: bold;
-
+  overflow: auto;
 }
 
 .dayBox:hover {
@@ -32,10 +32,12 @@
 }
 
 .currentDay {
-
   background: #b6b6b629;
 }
 
+.numStyle {
+  position: fixed;
+}
 
 .pointerNormal {
   cursor: pointer;

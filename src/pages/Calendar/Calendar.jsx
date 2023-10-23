@@ -94,7 +94,7 @@ export const Calendar = () => {
             >
               <div className={!isCurrentDay(dayItem) ? s.dayBox : s.currentDay}>
                 <div className={dayItem.day() === 6 || dayItem.day() === 0 ? s.weekend : null}>
-                  {dayItem.format('D')}
+                  <p className={s.numStyle}>{dayItem.format('D')}</p>
                 </div>
                 <EventListComponent dayItem={dayItem} localEvents={localEvents} />
               </div>
